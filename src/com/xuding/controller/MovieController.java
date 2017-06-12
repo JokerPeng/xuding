@@ -68,11 +68,16 @@ public class MovieController {
 		        String fileName = file.getOriginalFilename();
 		        String suffix = fileName.substring(fileName.lastIndexOf("."));
 		        is = file.getInputStream();
-		        String pathString = request.getRealPath("");
+		        String pathStr = request.getRealPath("");
 		        String staticPath = "static" + File.separator + "file" + File.separator;
-		        String servicePath = pathString + File.separator;
-		        String savePath = staticPath + getSerialNum() + suffix;
-		        fos = new FileOutputStream(servicePath + savePath);
+		        String servicePath = pathStr + File.separator;
+		        String savePath = servicePath + staticPath;
+		        File fileSavePath = new File(savePath);
+		        if(!fileSavePath.exists()){
+		        	fileSavePath.mkdirs();
+		        }
+		        String newFileName = getSerialNum() + suffix;
+		        fos = new FileOutputStream(savePath + newFileName);
 		        
 		        byte b[] = new byte[1024];
 		        int len = 0;
@@ -80,7 +85,7 @@ public class MovieController {
 		        	fos.write(b, 0, len);
 		        }
 		        
-		        movie.setMoviePath(savePath);
+		        movie.setMoviePath(staticPath + newFileName);
 		      }  
 		    } 
 		    
