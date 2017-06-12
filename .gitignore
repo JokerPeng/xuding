@@ -1,0 +1,7 @@
+﻿.myeclipse/*
+.settings/*
+.classpath
+.mymetadata
+.project
+.springBeans
+WebRoot/WEB-INF/classes/*
